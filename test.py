@@ -8,13 +8,23 @@ from typing import Any
 if __name__ == "__main__":
     # Example usage:
     print("Running agent with example query...")
-    result = run_agent(
-        "Tạo đơn giúp tôi 2 màn hình Dell UltraSharp U2724D và 1 Logitech MX Keys S cho công ty mới.",
-        provider="google",
-        today="2026-06-01",
-    )
-    print("Final Answer:", result.final_answer)
-    print("Tool Calls:")
-    for call in result.tool_calls:
-        print(f"  - {call.name} with args {call.args} returned {call.output}")
-    
+    history = []
+    query = "Tạo đơn giúp tôi 2 màn hình Dell UltraSharp U2724D và 1 Logitech MX Keys S cho công ty mới."
+
+    while query != "exit":    
+        result = run_agent(
+            query,
+            provider="google",
+            today="2026-06-01",
+            output_dir=Path("output"),
+        )
+        history.append({
+            "query": query,
+            "your_answer": result.final_answer,
+        })
+        print("Final Answer:", result.final_answer)
+        print("Tool Calls:")
+        for call in result.tool_calls:
+            print(f"  - {call.name} with args {call.args} returned {call.output}")
+        query = input("Enter your next query (or 'exit' to quit): ")
+        query = "\n".join(history[-3:]) + "\n" + query  # Include last 3 interactions in the context

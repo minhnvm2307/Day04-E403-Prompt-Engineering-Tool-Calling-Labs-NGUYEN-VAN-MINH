@@ -8,9 +8,9 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from solution.agent.graph import run_agent
-import solution.agent.graph as solution_graph
-from solution.utils.data_store import OrderDataStore
+from src.agent.graph import run_agent
+import src.agent.graph as solution_graph
+from src.utils.data_store import OrderDataStore
 from src.core.schemas import OrderLineInput
 
 
@@ -68,3 +68,12 @@ def test_guardrail_case_refuses_without_tools() -> None:
 def test_reference_agent_no_longer_uses_preflight_shortcuts() -> None:
     assert not hasattr(solution_graph, "build_guardrail_response")
     assert not hasattr(solution_graph, "build_clarification_response")
+
+
+# test
+if __name__ == "__main__":
+    test_save_order_matches_expected_fixture(tmp_path=Path("./tmp"))
+    test_clarification_case_stops_before_model_or_tools()
+    test_guardrail_case_refuses_without_tools()
+    test_reference_agent_no_longer_uses_preflight_shortcuts()
+    print("All tests passed!")
