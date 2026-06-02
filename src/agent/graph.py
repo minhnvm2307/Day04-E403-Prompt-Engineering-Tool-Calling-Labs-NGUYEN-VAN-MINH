@@ -48,7 +48,7 @@ def build_system_prompt(today: str | None = None) -> str:
     - Return one concise final answer in Vietnamese.
     - Mention `today` so the model knows the current date for deterministic references if needed.
     """
-    return PROMPT["default"].format(current_day=today or "2026-06-01")
+    return PROMPT["version2"].format(current_day=today or "2026-06-01")
 
 
 def build_tools(store: OrderDataStore):

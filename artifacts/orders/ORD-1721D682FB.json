@@ -58,6 +58,5 @@
     "customer_tier": "standard"
   },
   "save_path": "artifacts/orders/ORD-1721D682FB.json",
-  "source": "llm-order-agent",
-  "notes": "Don hang tao tu chat"
+  "source": "llm-order-agent"
 }
