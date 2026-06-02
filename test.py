@@ -10,11 +10,10 @@ if __name__ == "__main__":
     print("Running agent with example query...")
     history = []
     query = "Tạo đơn giúp tôi 2 màn hình Dell UltraSharp U2724D và 1 Logitech MX Keys S cho công ty mới."
-
     while query != "exit":    
         result = run_agent(
             query,
-            provider="google",
+            provider="openai",
             today="2026-06-01",
             output_dir=Path("output"),
         )

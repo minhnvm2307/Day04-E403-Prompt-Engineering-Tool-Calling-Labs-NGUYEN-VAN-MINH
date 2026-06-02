@@ -36,7 +36,8 @@ def build_chat_model(
         from langchain_google_genai import ChatGoogleGenerativeAI
 
         return ChatGoogleGenerativeAI(
-            model=model_name or os.getenv("LLM_MODEL", "gemini-2.5-flash"),
+            model=model_name or os.getenv("LLM_MODEL"),
+            # base_url=os.getenv("LLM_BASE_URL"),
             temperature=temperature,
             google_api_key=os.getenv("GOOGLE_API_KEY"),
         )
@@ -48,7 +49,16 @@ def build_chat_model(
             base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
             temperature=temperature,
         )
-    raise ValueError("This lab supports only the `google` and `ollama` providers.")
+    if provider == "openai":
+        from langchain_openai import ChatOpenAI
+
+        return ChatOpenAI(
+            model=model_name or os.getenv("9_ROUTER_MODEL", "cx/gpt-5.4"),
+            temperature=temperature,
+            openai_api_key=os.getenv("9_ROUTER_KEY"),
+            base_url=os.getenv("9_BASE_URL"),
+        )
+    raise ValueError("This lab supports only the `google`, `openai` and `ollama` providers.")
 
 
 def extract_json_object(raw: Any) -> dict[str, Any]:

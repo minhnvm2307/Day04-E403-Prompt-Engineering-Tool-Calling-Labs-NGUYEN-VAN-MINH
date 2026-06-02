@@ -104,8 +104,8 @@ def extract_token_usage(messages: list[Any]) -> dict[str, int]:
 def run_query(*, query: str, prompt_key: str, provider: str, model_name: str | None, today: str) -> dict[str, Any]:
     if prompt_key not in PROMPT:
         raise ValueError(f"Unknown prompt: {prompt_key}")
-    if provider not in {"google", "ollama"}:
-        raise ValueError("Provider must be 'google' or 'ollama'.")
+    if provider not in {"google", "ollama", "openrouter", "9router"}:
+        raise ValueError("Provider must be 'google', 'ollama', or 'openrouter'.")
 
     agent = build_web_agent(prompt_key=prompt_key, provider=provider, model_name=model_name, today=today)
     started_at = time.perf_counter()
@@ -290,6 +290,7 @@ INDEX_HTML = r"""<!doctype html>
       <select id="provider">
         <option value="google">google</option>
         <option value="ollama">ollama</option>
+        <option value="openrouter">openrouter</option>
       </select>
       <label for="model">Model override</label>
       <input id="model" placeholder="optional" />
