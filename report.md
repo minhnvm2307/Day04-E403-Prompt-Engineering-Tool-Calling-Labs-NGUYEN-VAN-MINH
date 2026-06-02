@@ -1,8 +1,9 @@
 # Report: Prompt Updates for Rubric Alignment
 
 ## What improvement
-
-
+- Design rules by reading the scoring test usecases
+- Guardrails
+- Minimize prompt length
 
 # VERSION of PROMPT:
 ## Version 1: score: 82.46
